@@ -139,7 +139,8 @@ class DataGridExtensionTest extends \PHPUnit_Framework_TestCase
         $datagridView = $this->getDataGridView('grid');
         $datagridWithThemeView = $this->getDataGridView('grid_with_header_theme');
 
-        $cellView = $this->getColumnCellView($datagridView, 'text', 'title', 'This is value 1');
+        $value = "This is value 1 <script>alert('xss');</script>";
+        $cellView = $this->getColumnCellView($datagridView, 'text', 'title', $value);
         $cellWithThemeView = $this->getColumnCellView($datagridWithThemeView, 'text', 'title' ,'This is value 2');
 
         $html = $this->twig->render('datagrid/cell_widget_test.html.twig', array(
